@@ -14,7 +14,7 @@ This script needs to know where the code lives. It can make some assumptions (e.
 export WORK_DIR=/full/path/to/code/root
 ```
 
-(Alfresco engineers: our internal Dev Env takes care of that)
+(Alfresco engineers: our old internal Dev Env takes care of that if you use 'create-project' and 'workon')
 
 Configuration
 =============
@@ -29,34 +29,34 @@ Commands
 These commands use the _MESSAGE_SEARCH_PATH_ and _EXCLUDED_FILES_ config vars to whitelist and then filter the list of _.properties_ files to include
 
 ```
-l10n files
+l10n-bundle files
 ```
 returns a list of the files (in the default locale) that are eligable for translation. 
 
 ```
-l10n files <locale>
+l10n-bundle files <locale>
 ```
 As above, but returns a list of the files in the specified locale that already exist. If _locale_ is "all", then all locales (inc. default) will be returned.
 
 ```
-l10n export <path>
+l10n-bundle export <path>
 ```
 generates a zip file containing all the properties files for each supported language. These zip files are written to _path_ and are named with the locale and the working copy revision number (svn) or current time stamp (git).
 
 ```
-l10n install <path>
+l10n-bundle install <path>
 ```
 overlays a directory of properties files from _path_ to _$WORK_DIR_. Used to install a bundle following translation.
 
 ##Checking installed bundles
 ```
-l10n count
+l10n-bundle count
 ```
 runs a quick count of all the files and strings for each of the supported locales.
 
 
 ```
-l10n check <path>
+l10n-bundle check <path>
 ```
 runs a rudimentary QA script that checks each translation for completeness and technical (but not linguistic) correctness. Reports are written to _path_. One report per locale is generated, containing: 
 * strings missing from translated bundle
@@ -77,22 +77,22 @@ Alfresco and related modules require properties files to contain only ASCII char
 In the commands below, _encoding_ is usually UTF8, but supports anything that [native2ascii](http://docs.oracle.com/javase/7/docs/technotes/tools/solaris/native2ascii.html) supports.
 
 ```
-l10n decode <path> <encoding>
+l10n-bundle decode <path> <encoding>
 ```
 Converts all properties files located at _path_ (recursively) from unicode escaped ASCII to _encoding_. This is useful when exporting bundles and sending them to a translator.
 
 ```
-l10n decode-string <string> <encoding>
+l10n-bundle decode-string <string> <encoding>
 ```
 Converts the string from unicode escaped ASCII to _encoding_.
 
 ```
-l10n encode <path> <encoding>
+l10n-bundle encode <path> <encoding>
 ```
 Converts all properties files located at _path_ (recursively) to unicode escaped ASCII from _encoding_. This is useful when installing bundles from translators.
 
 ```
-l10n encode-string <string> <encoding>
+l10n-bundle encode-string <string> <encoding>
 ```
 Converts the string to unicode escaped ASCII from _encoding_.
 
